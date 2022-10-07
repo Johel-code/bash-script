@@ -25,9 +25,11 @@ function add(){
         then
             while IFS= read line
             do
-                iniAux="$line"
-                if []
+                iniAux=$(echo $line | awk '{print $1}') 
+                finAux=$(echo $line | awk '{print $2}')
+                if [ $1 -lt $iniAux -o $1 -ge $finAux -o ]
                 then
+                    
                 else
                 fi
             done < citas.txt
@@ -59,6 +61,7 @@ do
             exit
             ;;
         -a|--add)
+            ADD="$2 $3 $4"
             add $2 $3 $4
             shift
             shift

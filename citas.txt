@@ -10,3 +10,9 @@ text
 12 12 --search
 15 23 Juan
 12 0 Juan
+12 20 Juan
+12 20 Juan
+12 20 Juan
+19 20 Juan
+19 20 Juan
+19 20 Juan
