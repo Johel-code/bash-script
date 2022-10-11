@@ -29,8 +29,7 @@ function add(){
                 finAux=$(echo $line | awk '{print $2}')
                 if [ $1 -lt $iniAux -o $1 -ge $finAux -o ]
                 then
-
-                else
+                   echo prueba 
                 fi
             done < citas.txt
         else
@@ -67,7 +66,7 @@ function end(){
         echo "El parametro debe estar entre el rango [1-23]"
         exit 1
     fi
-    awk '/\{$1}/ {print $0}' citas.txt
+    echo | awk -v var="$1" /var/ '{print $0}' citas.txt
 }
 
 while [[ $# -gt 0 ]]
