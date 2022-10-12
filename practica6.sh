@@ -84,7 +84,7 @@ function end(){
         echo "El parametro debe estar entre el rango [1-23]"
         exit 1
     fi
-    awk '/\{$1}/ {print $0}' citas.txt
+    awk '$2 ~/'"$1"'/ {print $0}' citas.txt
 }
 
 while [[ $# -gt 0 ]]
