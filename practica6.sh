@@ -9,8 +9,9 @@ function help(){
 function add(){
 
     if [ $# -ne 3 ]
-    then 
-        help
+    then
+        echo "Numero de parametros incorrecto"
+        echo "Ejecuta -h o --help para tener ayuda"
         exit 1
     fi
 
@@ -27,10 +28,16 @@ function add(){
             do
                 iniAux=$(echo $line | awk '{print $1}') 
                 finAux=$(echo $line | awk '{print $2}')
-                if [ $1 -lt $iniAux -o $1 -ge $finAux -o ]
+                nomAct=$(echo $line | awk '{print $3}')
+                if [ $1 -ge $iniAux -a $2 -le $finAux ]
                 then
-                    
-                else
+                    echo "Cita no disponible en ese rango de hora"    
+                    exit 1
+                fi
+                if [[ "$3" == "$nomAct" ]]
+                then
+                    echo "Nombre de pasciente ya registrado"
+                    exit 1
                 fi
             done < citas.txt
         else
@@ -44,11 +51,21 @@ function add(){
     fi
     
     echo "$1 $2 $3" >> "./citas.txt"
-    cat citas.txt
 
 }
 function search(){
-    echo buscando        
+
+    if [ $# -ne 1 ]
+    then 
+        echo "Numero de parametros incorrecto"
+        echo "Ejecuta -h o --help para tener ayuda"
+        exit 1
+    fi
+    grep "$1" ./citas.txt
+
+}
+function init(){
+    awk '{print $1}' ./citas.txt | grep "^$1$"
 }
 
 while [[ $# -gt 0 ]]
@@ -70,12 +87,14 @@ do
             ;;
         -s|--search)
             SEARCH="$2"
-            search
+            search $2
             shift
             shift
             ;;
         -i|--init)
             INIT="$2"
+            init $2
+            shift
             shift
             shift
             ;;

@@ -1,18 +1,9 @@
-text
-text
-text
-20 30 Johel
 20 30 Johel
 15 25 Juan
-15 25 Juan
-12 12 --hour
-12 12 --hour
-12 12 --search
+12 13 --search
 15 23 Juan
-12 0 Juan
-12 20 Juan
-12 20 Juan
 12 20 Juan
 19 20 Juan
-19 20 Juan
-19 20 Juan
+20 22 Juan
+1 23 Juan
+11 12 Juan
