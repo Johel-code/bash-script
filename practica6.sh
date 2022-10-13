@@ -66,7 +66,24 @@ function search(){
 
 }
 function init(){
-    awk '{print $1}' ./citas.txt | grep "^$1$"
+    if [ $# -ne 1 ]
+    then 
+        echo "Numero de parametros incorrecto"
+        echo "Ejecuta -h o --help para tener ayuda"
+        exit 1
+    fi
+    es_numero='^[0-9]+$'
+    if ! [[ $1 =~ $es_numero ]] 
+    then
+        echo "ERROR: Debe introducir  un numero"
+        exit 1
+    fi
+    if [ $1 -lt 0 -o $1 -gt 22 ]
+    then
+        echo "El parametro debe estar entre el rango [0-22]"
+        exit 1
+    fi
+    awk '$1 ~/^'"$1"'$/ {print $0}' citas.txt
 }
 function end(){
     if [ $# -ne 1 ]
@@ -86,7 +103,7 @@ function end(){
         echo "El parametro debe estar entre el rango [1-23]"
         exit 1
     fi
-    awk '$2 ~/'"$1"'/ {print $0}' citas.txt
+    awk '$2 ~/^'"$1"'$/ {print $0}' citas.txt
 }
 
 while [[ $# -gt 0 ]]
