@@ -29,7 +29,7 @@ function add(){
                 iniAux=$(echo $line | awk '{print $1}') 
                 finAux=$(echo $line | awk '{print $2}')
                 nomAct=$(echo $line | awk '{print $3}')
-                if [ $1 -ge $iniAux -a $2 -le $finAux ]
+                if [ $1 -ge $iniAux -a $1 -lt $finAux ] || [ $2 -gt $iniAux -a $2 -le $finAux ] || [ $1 -lt $iniAux -a $2 -gt $finAux ]
                 then
                     echo "Cita no disponible en ese rango de hora"    
                     exit 1
@@ -51,7 +51,7 @@ function add(){
     fi
     
     echo "$1 $2 $3" >> "./citas.txt"
-
+    echo Cita agregada correctamente!
 }
 function search(){
 
@@ -105,6 +105,12 @@ function end(){
     fi
     awk '$2 ~/^'"$1"'$/ {print $0}' citas.txt
 }
+function name(){
+    sort -k 3 citas.txt
+}
+function hour(){
+    sort -n citas.txt
+}
 
 while [[ $# -gt 0 ]]
 do
@@ -142,14 +148,12 @@ do
             shift
             shift
             ;;
-        -n|--name)
-            NAME="$2"
-            shift
+        -n|--name)            
+            name
             shift
             ;;
         -o|--hour)
-            HOUR="$2"
-            shift
+            hour
             shift
             ;;
         *)
