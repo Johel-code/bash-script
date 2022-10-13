@@ -61,7 +61,8 @@ function search(){
         echo "Ejecuta -h o --help para tener ayuda"
         exit 1
     fi
-    grep "$1" ./citas.txt
+    awk '$3 ~/'"$1"'/ {print $0}' citas.txt
+    #grep "$1" ./citas.txt
 
 }
 function init(){
@@ -70,7 +71,8 @@ function init(){
 function end(){
     if [ $# -ne 1 ]
     then 
-        help
+        echo "Numero de parametros incorrecto"
+        echo "Ejecuta -h o --help para tener ayuda"
         exit 1
     fi
     es_numero='^[0-9]+$'
